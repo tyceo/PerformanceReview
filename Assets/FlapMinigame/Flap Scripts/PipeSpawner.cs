@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
@@ -7,6 +8,7 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] GameObject pipe;
     [SerializeField] float maxTime = 1.5f;
     [SerializeField] float heightRange;
+    [SerializeField] public bool spawningPipes = true;
 
     private float timer;
 
@@ -30,11 +32,20 @@ public class PipeSpawner : MonoBehaviour
 
     private void SpawnPipe()
     {
-        Vector3 spawnPos = transform.position + new Vector3(6, Random.Range(-heightRange, heightRange) + 2);
-        GameObject pipes = Instantiate(pipe, spawnPos, Quaternion.identity);
+        if (spawningPipes)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(6, Random.Range(-heightRange, heightRange) + 2);
+            GameObject pipes = Instantiate(pipe, spawnPos, Quaternion.identity);
 
-        Destroy(pipes, 20f);
+            Destroy(pipes, 20f);
+
+            
+        }
     }
 
+    void StopSpawningPipes()
+    {
+        spawningPipes = false;
+    }
 
 }
