@@ -38,6 +38,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2781388495
+    locked: 0
+  - name: GameBackground
+    uniqueID: 1756091751
+    locked: 0
+  - name: GameStuff
+    uniqueID: 2273852267
+    locked: 0
+  - name: GameUI
+    uniqueID: 2039026015
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 1594665775
+    locked: 0
+  - name: TaskBar
+    uniqueID: 3459304493
+    locked: 0
+  - name: UI
+    uniqueID: 484297405
     locked: 0
