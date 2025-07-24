@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
+
+
 
 public class TypingMinigame : MonoBehaviour
 {
@@ -8,6 +11,8 @@ public class TypingMinigame : MonoBehaviour
     public TMP_InputField inputField;
     public TMP_Text timerText;
     public TMP_Text scoreText;
+
+    public float CoolDown = 5;
 
     public float gameDuration = 7f;
     private float timer;
@@ -53,10 +58,15 @@ public class TypingMinigame : MonoBehaviour
         ShowNewWord();
         inputField.text = "";
         inputField.ActivateInputField();
+
+        isGameActive = true;
+        timerText.text = "Time's up!";
+        inputField.interactable = true;
     }
 
     void ShowNewWord()
     {
+        ScoreManager.Instance.AddScore(1);
         int randomIndex = Random.Range(0, wordList.Count);
         currentWord = wordList[randomIndex];
         wordDisplay.text = currentWord;
@@ -89,6 +99,20 @@ public class TypingMinigame : MonoBehaviour
 
         // OPTIONAL: Save score to a game manager or HR review system
         Debug.Log("Final Score: " + score);
+        StartCoroutine(ExampleCoroutine());
+    }
+
+    IEnumerator ExampleCoroutine()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(CoolDown);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        StartGame();
     }
 
     void UpdateTimerText()

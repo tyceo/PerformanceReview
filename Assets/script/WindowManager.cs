@@ -1,8 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WindowManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] windows; // Assign all window GameObjects in inspector
+
+    [SerializeField] private GameObject TypingGameUIToClose;
+    public GameObject TypingGame;
 
     public void ShowWindow(int windowIndex)
     {
@@ -26,5 +30,19 @@ public class WindowManager : MonoBehaviour
         {
             window.SetActive(false);
         }
+    }
+
+    public void Update()
+    {
+        if (!TypingGame.activeInHierarchy)
+        {
+            TypingGameUIToClose.SetActive(false);
+        }
+
+        if (TypingGame.activeInHierarchy)
+        {
+            TypingGameUIToClose.SetActive(true);
+        }
+;
     }
 }
