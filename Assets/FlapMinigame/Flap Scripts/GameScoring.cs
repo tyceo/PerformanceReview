@@ -9,13 +9,9 @@ public class GameScoring : MonoBehaviour
 
     [SerializeField] private GameObject playerStartingPosition;
     [SerializeField] PipeSpawner gameManager;
+    [SerializeField] bool ranScripts = false;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,19 +30,30 @@ public class GameScoring : MonoBehaviour
     {
         if (collision.gameObject.tag != "Goal")
         {
-            ResetPlayerPosition();
-            gameManager.spawningPipes = false;
-            StartCoroutine(RestartPipeSpawning());
-            Debug.Log("player failed");
-            
+            PlayerFailure();
+
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.gameObject.activeSelf && ranScripts == false)
+        {
+            Debug.Log("ran");
+            PlayerFailure();
+            ranScripts = true;
+        }
     }
+
+    void PlayerFailure()
+    {
+
+        ResetPlayerPosition();
+        gameManager.spawningPipes = false;
+        StartCoroutine(RestartPipeSpawning());
+        Debug.Log("player failed");
+    }    
 
 
     private void ResetPlayerPosition()
