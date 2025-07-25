@@ -43,9 +43,5 @@ public class PipeSpawner : MonoBehaviour
         }
     }
 
-    void StopSpawningPipes()
-    {
-        spawningPipes = false;
-    }
 
 }
