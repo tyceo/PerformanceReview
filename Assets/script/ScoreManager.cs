@@ -31,8 +31,10 @@ public class ScoreManager : MonoBehaviour
     {
         if (Input.GetKeyDown(incrementKey))
         {
+            /*
             AddScore(spacePressIncrement);
             StartCoroutine(FlashScoreText());
+            */
         }
     }
 

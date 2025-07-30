@@ -54,11 +54,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: 1
+    uniqueID: 2681977477
+    locked: 0
+  - name: 2
     uniqueID: 1594665775
     locked: 0
-  - name: TaskBar
+  - name: 3
     uniqueID: 3459304493
+    locked: 0
+  - name: 4
+    uniqueID: 1680658289
+    locked: 0
+  - name: 5
+    uniqueID: 69422427
     locked: 0
   - name: UI
     uniqueID: 484297405
