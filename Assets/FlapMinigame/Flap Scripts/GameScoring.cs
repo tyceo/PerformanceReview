@@ -19,6 +19,7 @@ public class GameScoring : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             Debug.Log("Goal!");
+            ScoreManager.Instance.AddScore(1);
         }
 
 
