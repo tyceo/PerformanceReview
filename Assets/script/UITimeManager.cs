@@ -25,6 +25,8 @@ public class UITimeManager : MonoBehaviour
     private int totalMinutesPassed = 0;
     private int endTimeInMinutes;
 
+    public GameObject FivePMBanner;
+
     private void Awake()
     {
         if (Instance == null)
@@ -91,6 +93,7 @@ public class UITimeManager : MonoBehaviour
         isWorkDayOver = true;
         Debug.Log($"Work day ended! It's {endHour:00}:{endMinute:00}!");
         OnWorkDayEnded.Invoke();
+        FivePMBanner.SetActive(true);
     }
 
     public void SetTime(int hour, int minute)
