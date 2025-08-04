@@ -6,7 +6,9 @@ public class WindowManager : MonoBehaviour
     [SerializeField] private GameObject[] windows; // Assign all window GameObjects in inspector
 
     [SerializeField] private GameObject TypingGameUIToClose;
-    public GameObject TypingGame;
+    [SerializeField] private GameObject BuzzFeedUIToClose;
+    public GameObject TypingGame;  
+    public GameObject BuzzFeed;
 
     public void ShowWindow(int windowIndex)
     {
@@ -42,6 +44,16 @@ public class WindowManager : MonoBehaviour
         if (TypingGame.activeInHierarchy)
         {
             TypingGameUIToClose.SetActive(true);
+        }
+
+          if (!BuzzFeed.activeInHierarchy)
+        {
+            BuzzFeedUIToClose.SetActive(false);
+        }
+
+        if (BuzzFeed.activeInHierarchy)
+        {
+            BuzzFeedUIToClose.SetActive(true);
         }
 ;
     }
