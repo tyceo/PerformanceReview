@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class NewBehaviourScript : MonoBehaviour
+public class PaperTossMovement : MonoBehaviour
     {
 
         public SpringJoint2D spring;
