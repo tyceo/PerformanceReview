@@ -47,7 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
         void OnMouseDrag()
         {
 
-            if (spring.enabled = true)
+            if (spring.enabled == true)
             {
 
                 Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);//getting cursor position
