@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UITimeManager : MonoBehaviour
 {
@@ -94,7 +96,18 @@ public class UITimeManager : MonoBehaviour
         Debug.Log($"Work day ended! It's {endHour:00}:{endMinute:00}!");
         OnWorkDayEnded.Invoke();
         FivePMBanner.SetActive(true);
+        StartCoroutine(WaitAndExecute());
+        
     }
+    IEnumerator WaitAndExecute()
+    {
+        Debug.Log("Starting to wait...");
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        SceneManager.LoadScene("Computer");
+
+    }
+
+    
 
     public void SetTime(int hour, int minute)
     {
