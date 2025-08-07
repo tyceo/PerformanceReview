@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Goal
   - Draggable
+  - invisibleWall
   layers:
   - Default
   - TransparentFX

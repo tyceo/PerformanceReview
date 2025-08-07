@@ -8,32 +8,56 @@ public class PaperTossMovement : MonoBehaviour
     {
 
         public SpringJoint2D spring;
+        public GameObject invisibleWall;
+        
 
 
         void Awake()
         {
+            invisibleWall = GameObject.FindGameObjectWithTag("invisibleWall");
+            
+            spring = this.gameObject.GetComponent<SpringJoint2D>(); 
 
-            spring = this.gameObject.GetComponent<SpringJoint2D>(); //"spring" is the SpringJoint2D component that I added to my object
-
-            spring.connectedAnchor = gameObject.transform.position;//i want the anchor position to start at the object's position
+            spring.connectedAnchor = gameObject.transform.position;
 
         }
 
     private void Update()
     {
+       
+
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            
             OnMouseDown();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            invisibleWall.GetComponent<BoxCollider2D>().enabled = false;
             OnMouseUp();
+            StartCoroutine(StartCountdown());
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         { 
         OnMouseDrag();
+        
+        invisibleWall.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
+
+    private IEnumerator StartCountdown()
+    {
+        yield return new WaitForSeconds(4);
+
+
+        gameObject.GetComponent<PaperTossCollisions>().CreateNewPaperBall();
+
+        Destroy(gameObject);
+    }
+
+
+
 
 
     void OnMouseDown()
@@ -42,6 +66,9 @@ public class PaperTossMovement : MonoBehaviour
             spring.enabled = true;//I'm reactivating the SpringJoint2D component each time I'm clicking on my object becouse I'm disabling it after I'm releasing the mouse click so it will fly in the direction i was moving my mouse
 
         }
+
+
+
 
 
         void OnMouseDrag()
@@ -65,6 +92,7 @@ public class PaperTossMovement : MonoBehaviour
             spring.enabled = false;//disabling the spring component
 
         }
+
 
     }
 

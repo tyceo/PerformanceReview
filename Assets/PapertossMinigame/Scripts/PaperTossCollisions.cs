@@ -8,17 +8,7 @@ public class PaperTossCollisions : MonoBehaviour
     [SerializeField] private GameObject paperballPrefab;
     [SerializeField] private Transform spawnPos;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,11 +18,32 @@ public class PaperTossCollisions : MonoBehaviour
 
             //add manager functions
 
-            Instantiate(paperballPrefab, new Vector3(-5.81f, 0, 0), Quaternion.identity);
-            
+
+
+             GameObject clone =  Instantiate(paperballPrefab, new Vector3(-5.81f, 0, 0), Quaternion.identity);
+
+            //Instantiate(paperballPrefab, spawnPos);
+
+            //paperballPrefab.transform.position = new Vector3(-5.81f, 0, 0);
+
+            clone.transform.SetParent(spawnPos);
+
             Destroy(gameObject);
         }
     }
+
+
+    public void CreateNewPaperBall()
+    {
+
+        GameObject clone = Instantiate(paperballPrefab, new Vector3(-5.81f, 0, 0), Quaternion.identity);
+
+        clone.transform.SetParent(spawnPos);
+
+        
+    }
+
+
 
 
 }
