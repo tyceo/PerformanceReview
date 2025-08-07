@@ -28,6 +28,7 @@ public class UITimeManager : MonoBehaviour
     private int endTimeInMinutes;
 
     public GameObject FivePMBanner;
+    public GameObject Tutorial;
 
     private void Awake()
     {
@@ -41,6 +42,15 @@ public class UITimeManager : MonoBehaviour
         }
 
         InitializeTime();
+        StartCoroutine(TutorialHide());
+    }
+
+    IEnumerator TutorialHide()
+    {
+        
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        Tutorial.SetActive(false);
+
     }
 
     private void InitializeTime()
