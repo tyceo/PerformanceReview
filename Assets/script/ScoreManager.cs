@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TMP_Text scoreText;
 
-    [SerializeField] private int spacePressIncrement = 1;
+    //[SerializeField] private int spacePressIncrement = 1;
     [SerializeField] private KeyCode incrementKey = KeyCode.Space;
 
     private int currentScore = 0;
