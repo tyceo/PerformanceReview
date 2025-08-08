@@ -3,8 +3,6 @@ using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 
-
-
 public class TypingMinigame : MonoBehaviour
 {
     public TMP_Text wordDisplay;
@@ -13,25 +11,24 @@ public class TypingMinigame : MonoBehaviour
     public TMP_Text scoreText;
 
     public float CoolDown = 5;
-
     public float gameDuration = 7f;
+    public float bonusTimePerCorrectWord = 1.5f; // ⬅️ Adds time per correct word
+
     private float timer;
     private bool isGameActive = false;
+    private int score = 0;
 
     private List<string> wordList = new List<string> {
         "security", "email", "login", "password", "report",
         "access", "server", "phishing", "malware", "threat",
-        "network", "user", "office", "data", "firewall"
+        "network", "user", "office", "data", "firewall",
+        "data breach", "cyber attack", "zero trust", "ransomware", "social engineering" // ⬅️ Multi-word phrases
     };
 
     private string currentWord;
-    private int score = 0;
 
     void Start()
     {
-        timer = gameDuration;
-        score = 0;
-        UpdateTimerText();
         inputField.onSubmit.AddListener(CheckInput);
         StartGame();
     }
@@ -57,16 +54,13 @@ public class TypingMinigame : MonoBehaviour
         score = 0;
         ShowNewWord();
         inputField.text = "";
-        inputField.ActivateInputField();
-
-        isGameActive = true;
-        timerText.text = "Time's up!";
         inputField.interactable = true;
+        inputField.ActivateInputField(); // ⬅️ Auto-focus input
+        scoreText.text = "Score: 0";
     }
 
     void ShowNewWord()
     {
-        ScoreManager.Instance.AddScore(1);
         int randomIndex = Random.Range(0, wordList.Count);
         currentWord = wordList[randomIndex];
         wordDisplay.text = currentWord;
@@ -80,15 +74,15 @@ public class TypingMinigame : MonoBehaviour
         {
             score++;
             scoreText.text = "Score: " + score;
+
+            // ⬅️ Add bonus time for correct word
+            timer += bonusTimePerCorrectWord;
+
             ShowNewWord();
-            inputField.text = "";
-            inputField.ActivateInputField(); // Refocus
         }
-        else
-        {
-            inputField.text = "";
-            inputField.ActivateInputField();
-        }
+
+        inputField.text = "";
+        inputField.ActivateInputField(); // Refocus
     }
 
     void EndGame()
@@ -97,21 +91,13 @@ public class TypingMinigame : MonoBehaviour
         timerText.text = "Time's up!";
         inputField.interactable = false;
 
-        // OPTIONAL: Save score to a game manager or HR review system
         Debug.Log("Final Score: " + score);
-        StartCoroutine(ExampleCoroutine());
+        StartCoroutine(RestartAfterCooldown());
     }
 
-    IEnumerator ExampleCoroutine()
+    IEnumerator RestartAfterCooldown()
     {
-        //Print the time of when the function is first called.
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(CoolDown);
-
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         StartGame();
     }
 
