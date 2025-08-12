@@ -9,7 +9,7 @@ public class PaperTossMovement : MonoBehaviour
 
         public SpringJoint2D spring;
         public GameObject invisibleWall;
-        
+        public float resetSpeed = 2.8f;
 
 
         void Awake()
@@ -48,7 +48,7 @@ public class PaperTossMovement : MonoBehaviour
 
     private IEnumerator StartCountdown()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(resetSpeed);
 
 
         gameObject.GetComponent<PaperTossCollisions>().CreateNewPaperBall();

@@ -16,7 +16,7 @@ public class FlapMinigameMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             rb.velocity = Vector2.up * velocity;
         }
