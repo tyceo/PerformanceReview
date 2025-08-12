@@ -15,7 +15,7 @@ public class PaperTossCollisions : MonoBehaviour
         if (collision.gameObject.tag == "Goal")
         {
             Debug.Log("Score");
-            ScoreManager.Instance.AddScore(1);
+            ScoreManager.Instance.AddScore(3);
 
             //add manager functions
 

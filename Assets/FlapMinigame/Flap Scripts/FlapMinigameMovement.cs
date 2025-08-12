@@ -19,6 +19,7 @@ public class FlapMinigameMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             rb.velocity = Vector2.up * velocity;
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 }

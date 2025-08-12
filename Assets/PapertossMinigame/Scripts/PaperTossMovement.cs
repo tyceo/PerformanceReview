@@ -14,6 +14,7 @@ public class PaperTossMovement : MonoBehaviour
 
         void Awake()
         {
+            gameObject.GetComponent<Rigidbody2D>().simulated = false;
             invisibleWall = GameObject.FindGameObjectWithTag("invisibleWall");
             
             spring = this.gameObject.GetComponent<SpringJoint2D>(); 
@@ -29,7 +30,7 @@ public class PaperTossMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            
+            gameObject.GetComponent<Rigidbody2D>().simulated = true;
             OnMouseDown();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
