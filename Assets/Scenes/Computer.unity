@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipe: {fileID: 6299726194143518908, guid: 94a8657b6a6693e44b68bd9bbf146f67, type: 3}
-  maxTime: 3
+  maxTime: 2
   heightRange: 3
   spawningPipes: 1
 --- !u!1 &89333180
