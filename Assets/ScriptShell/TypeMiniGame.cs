@@ -72,6 +72,7 @@ public class TypingMinigame : MonoBehaviour
 
         if (userInput.Trim().ToLower() == currentWord.ToLower())
         {
+            ScoreManager.Instance.AddScore(1);
             score++;
             scoreText.text = "Score: " + score;
 
@@ -88,7 +89,7 @@ public class TypingMinigame : MonoBehaviour
     void EndGame()
     {
         isGameActive = false;
-        timerText.text = "Time's up!";
+        timerText.text = "Time's up! Try again in a few seconds";
         inputField.interactable = false;
 
         Debug.Log("Final Score: " + score);

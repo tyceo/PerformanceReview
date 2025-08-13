@@ -48,7 +48,7 @@ public class UITimeManager : MonoBehaviour
     IEnumerator TutorialHide()
     {
         
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        yield return new WaitForSeconds(3f); // Wait for 5 seconds
         Tutorial.SetActive(false);
 
     }

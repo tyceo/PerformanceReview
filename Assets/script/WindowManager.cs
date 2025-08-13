@@ -10,6 +10,9 @@ public class WindowManager : MonoBehaviour
     public GameObject TypingGame;  
     public GameObject BuzzFeed;
 
+    public GameObject Email;
+    [SerializeField] private GameObject EmailUIToClose;
+
     public void ShowWindow(int windowIndex)
     {
         // Hide all windows first
@@ -46,7 +49,7 @@ public class WindowManager : MonoBehaviour
             TypingGameUIToClose.SetActive(true);
         }
 
-          if (!BuzzFeed.activeInHierarchy)
+        if (!BuzzFeed.activeInHierarchy)
         {
             BuzzFeedUIToClose.SetActive(false);
         }
@@ -54,6 +57,17 @@ public class WindowManager : MonoBehaviour
         if (BuzzFeed.activeInHierarchy)
         {
             BuzzFeedUIToClose.SetActive(true);
+        }
+
+        if (!Email.activeInHierarchy)
+        {
+            EmailUIToClose.SetActive(false);
+        }
+
+        if (Email.activeInHierarchy)
+        {
+            EmailUIToClose.SetActive(true);
+            
         }
 ;
     }
