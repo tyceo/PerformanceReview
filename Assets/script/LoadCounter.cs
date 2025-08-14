@@ -7,8 +7,16 @@ public class LoadCounter : MonoBehaviour
     public static LoadCounter Instance;
 
     public int sceneLoadCount = 0;
+    public int DayOneScore = 0; // Score for Day One
+    public int DayTwoScore = 0; // Score for Day Two
+    public int DayThreeScore = 0; // Score for Day Three
+    public int DayFourScore = 0; // Score for Day Four
+    public int DayFiveScore = 0; // Score for Day Five
+
+    public int WrongAmount = 0;
 
     private EmailManager emailManager;  // Reference to the script component
+     
 
     private void Awake()
     {
@@ -21,6 +29,35 @@ public class LoadCounter : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+    public void ReadScore()
+    {
+        Debug.Log("read score here");
+        if (sceneLoadCount == 1)
+        {
+            DayOneScore = ScoreManager.Instance.GetScore();
+            Debug.Log($"Day One Score: {DayOneScore}");
+        }
+        else if (sceneLoadCount == 2)
+        {
+            DayTwoScore = ScoreManager.Instance.GetScore();
+            Debug.Log($"Day Two Score: {DayTwoScore}");
+        }
+        else if (sceneLoadCount == 3)
+        {
+            DayThreeScore = ScoreManager.Instance.GetScore();
+            Debug.Log($"Day Three Score: {DayThreeScore}");
+        }
+        else if (sceneLoadCount == 4)
+        {
+            DayFourScore = ScoreManager.Instance.GetScore();
+            Debug.Log($"Day Four Score: {DayFourScore}");
+        }
+        else if (sceneLoadCount == 5)
+        {
+            DayFiveScore = ScoreManager.Instance.GetScore();
+            Debug.Log($"Day Five Score: {DayFiveScore}");
         }
     }
 
@@ -55,7 +92,17 @@ public class LoadCounter : MonoBehaviour
 
                     StartCoroutine(DelayedReveal3());
                 }
-                
+                if (sceneLoadCount == 4)
+                {
+
+                    StartCoroutine(DelayedReveal4());
+                }
+                if (sceneLoadCount == 5)
+                {
+
+                    StartCoroutine(DelayedReveal5());
+                }
+
             }
             else
             {
@@ -74,6 +121,7 @@ public class LoadCounter : MonoBehaviour
 
         if (emailManager != null)
         {
+            //emailManager.RevealNextEmail();
             emailManager.RevealNextEmail();
         }
     }
@@ -96,6 +144,32 @@ public class LoadCounter : MonoBehaviour
             emailManager.RevealNextEmail();
             emailManager.RevealNextEmail();
             emailManager.RevealNextEmail();
+        }
+    }
+    private IEnumerator DelayedReveal4()
+    {
+        yield return new WaitForSeconds(1f);  // wait 1 second
+
+        if (emailManager != null)
+        {
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+        }
+    }
+    private IEnumerator DelayedReveal5()
+    {
+        yield return new WaitForSeconds(1f);  // wait 1 second
+
+        if (emailManager != null)
+        {
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            emailManager.RevealNextEmail();
+            
         }
     }
 

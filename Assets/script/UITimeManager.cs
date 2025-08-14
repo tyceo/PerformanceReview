@@ -29,6 +29,7 @@ public class UITimeManager : MonoBehaviour
 
     public GameObject FivePMBanner;
     public GameObject Tutorial;
+    public LoadCounter loadCounter;
 
     private void Awake()
     {
@@ -87,6 +88,7 @@ public class UITimeManager : MonoBehaviour
             // Check if we've reached end time
             if (totalTime >= endTimeInMinutes)
             {
+                
                 EndWorkDay();
             }
         }
@@ -102,6 +104,15 @@ public class UITimeManager : MonoBehaviour
 
     private void EndWorkDay()
     {
+        loadCounter = LoadCounter.Instance; //  use the singleton reference
+        if (loadCounter != null)
+        {
+            loadCounter.ReadScore();
+        }
+        else
+        {
+            Debug.LogWarning("LoadCounter.Instance is null!");
+        }
         isWorkDayOver = true;
         Debug.Log($"Work day ended! It's {endHour:00}:{endMinute:00}!");
         OnWorkDayEnded.Invoke();
@@ -134,6 +145,7 @@ public class UITimeManager : MonoBehaviour
 
         if (!isWorkDayOver && newTotalMinutes >= endTimeInMinutes)
         {
+            
             EndWorkDay();
         }
     }

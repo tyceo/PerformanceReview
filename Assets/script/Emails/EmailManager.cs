@@ -61,8 +61,8 @@ public class EmailManager : MonoBehaviour
         /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            RevealNextEmail();
             
+            Email wrongEmail = CreateWrongCountEmail();
         }
         */
     }
@@ -77,6 +77,16 @@ public class EmailManager : MonoBehaviour
             revealedCount++;
         }
     }
+
+    public void RevealEmail4()
+    {
+        if (revealedCount < spawnedEmails.Count)
+        {
+            spawnedEmails[3].SetActive(true);
+            revealedCount++;
+        }
+    }
+    
 
     public void ShowEmail(Email email)
     {
@@ -143,5 +153,7 @@ public class EmailManager : MonoBehaviour
         // Hide the answer buttons after answering
         SetAnswerButtonsActive(false);
     }
+
+    
 
 }

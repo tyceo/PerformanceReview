@@ -2391,7 +2391,7 @@ MonoBehaviour:
     hasBeenAnswered: 0
   - senderName: Jason <Jasoniscool@sortinginc.com.au>
     subject: jason's cool email
-    body: jason is emailing to say he had a bad day :(
+    body: god the manager keeps micromanaging me :(
     textA: tell him it's going to get better
     textB: tell him he deseres it
     textC: Ignore
@@ -2400,6 +2400,31 @@ MonoBehaviour:
     - tell him it's going to get better
     - tell him he deseres it
     - Ignore
+    hasBeenAnswered: 0
+  - senderName: The Manager <danodubwad@31231edd.gmail.au>
+    subject: raise
+    body: Wow! You are doing really well! Give me your card info and we will increase
+      your pay!
+    textA: email back details
+    textB: wow thanks
+    textC: Ignore
+    textD: Report
+    correctAnswers:
+    - Ignore
+    - Report
+    hasBeenAnswered: 0
+  - senderName: HR <askhr@sortinginc.com.au>
+    subject: Report
+    body: nothing
+    textA: Ok
+    textB: Ok
+    textC: Ignore
+    textD: Report
+    correctAnswers:
+    - Ok
+    - Ok
+    - Ignore
+    - Report
     hasBeenAnswered: 0
   emailListParent: {fileID: 1523222591}
   emailListItemPrefab: {fileID: 2598045850892358461, guid: 55e20b49380425e44aca2d63dd734ed4, type: 3}
@@ -2580,8 +2605,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3917,8 +3942,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4015,6 +4040,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoadCount: 0
+  DayOneScore: 0
+  DayTwoScore: 0
+  DayThreeScore: 0
+  DayFourScore: 0
+  DayFiveScore: 0
+  WrongAmount: 0
 --- !u!4 &568094256
 Transform:
   m_ObjectHideFlags: 0
@@ -5927,6 +5958,7 @@ MonoBehaviour:
       m_Calls: []
   FivePMBanner: {fileID: 1981505872}
   Tutorial: {fileID: 486083672}
+  loadCounter: {fileID: 568094255}
 --- !u!4 &1182059602
 Transform:
   m_ObjectHideFlags: 0
@@ -6310,7 +6342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1269795766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7024,8 +7056,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8743,8 +8775,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9583,8 +9615,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
