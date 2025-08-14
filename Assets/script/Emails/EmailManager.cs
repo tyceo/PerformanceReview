@@ -35,8 +35,11 @@ public class EmailManager : MonoBehaviour
     private int correctCount = 0;
     private int wrongCount = 0;
 
+    public TMP_Text WrongAmountText;
+
     void Start()
     {
+        WrongAmountText.text = wrongCount.ToString();
         // Hide answer buttons at start
         SetAnswerButtonsActive(false);
 
@@ -78,11 +81,11 @@ public class EmailManager : MonoBehaviour
         }
     }
 
-    public void RevealEmail4()
+    public void RevealEmail5()
     {
         if (revealedCount < spawnedEmails.Count)
         {
-            spawnedEmails[3].SetActive(true);
+            spawnedEmails[4].SetActive(true);
             revealedCount++;
         }
     }

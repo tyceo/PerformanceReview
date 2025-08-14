@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
 
 public class LoadCounter : MonoBehaviour
 {
     public static LoadCounter Instance;
 
     public int sceneLoadCount = 0;
-    public int DayOneScore = 0; // Score for Day One
-    public int DayTwoScore = 0; // Score for Day Two
-    public int DayThreeScore = 0; // Score for Day Three
-    public int DayFourScore = 0; // Score for Day Four
-    public int DayFiveScore = 0; // Score for Day Five
+    public int DayOneScore = 0;
+    public int DayTwoScore = 0;
+    public int DayThreeScore = 0;
+    public int DayFourScore = 0;
+    public int DayFiveScore = 0;
 
     public int WrongAmount = 0;
 
-    private EmailManager emailManager;  // Reference to the script component
-     
+    private EmailManager emailManager;
+
+    public GameObject Cover;
 
     private void Awake()
     {
@@ -31,44 +33,82 @@ public class LoadCounter : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        StartCoroutine(UpdateDayTextNextFrame());
+    }
+
     public void ReadScore()
     {
-        Debug.Log("read score here");
-        if (sceneLoadCount == 1)
+        string dayName = sceneLoadCount switch
         {
-            DayOneScore = ScoreManager.Instance.GetScore();
-            Debug.Log($"Day One Score: {DayOneScore}");
-        }
-        else if (sceneLoadCount == 2)
+            1 => "Monday",
+            2 => "Monday",
+            3 => "Monday",
+            4 => "Monday",
+            5 => "Monday",
+            _ => null
+        };
+
+        if (dayName == null) return;
+
+        GameObject dayObj = GameObject.Find(dayName);
+        if (dayObj == null)
         {
-            DayTwoScore = ScoreManager.Instance.GetScore();
-            Debug.Log($"Day Two Score: {DayTwoScore}");
+            Debug.LogWarning($"Day object '{dayName}' not found in the scene!");
+            return;
         }
-        else if (sceneLoadCount == 3)
+
+        TMP_Text dayTMP = dayObj.GetComponent<TMP_Text>();
+        if (dayTMP == null)
         {
-            DayThreeScore = ScoreManager.Instance.GetScore();
-            Debug.Log($"Day Three Score: {DayThreeScore}");
+            Debug.LogWarning($"TMP_Text component not found on '{dayName}' object!");
+            return;
         }
-        else if (sceneLoadCount == 4)
+
+        switch (sceneLoadCount)
         {
-            DayFourScore = ScoreManager.Instance.GetScore();
-            Debug.Log($"Day Four Score: {DayFourScore}");
+            case 1:
+                dayTMP.text = "Monday";
+                DayOneScore = ScoreManager.Instance.GetScore();
+                Debug.Log($"Day One Score: {DayOneScore}");
+                break;
+            case 2:
+                dayTMP.text = "Tuesday";
+                DayTwoScore = ScoreManager.Instance.GetScore();
+                Debug.Log($"Day Two Score: {DayTwoScore}");
+                break;
+            case 3:
+                dayTMP.text = "Wednesday";
+                DayThreeScore = ScoreManager.Instance.GetScore();
+                Debug.Log($"Day Three Score: {DayThreeScore}");
+                break;
+            case 4:
+                dayTMP.text = "Thursday";
+                DayFourScore = ScoreManager.Instance.GetScore();
+                Debug.Log($"Day Four Score: {DayFourScore}");
+                break;
+            case 5:
+                dayTMP.text = "Friday";
+                DayFiveScore = ScoreManager.Instance.GetScore();
+                Debug.Log($"Day Five Score: {DayFiveScore}");
+                break;
         }
-        else if (sceneLoadCount == 5)
-        {
-            DayFiveScore = ScoreManager.Instance.GetScore();
-            Debug.Log($"Day Five Score: {DayFiveScore}");
-        }
+    }
+
+    private IEnumerator UpdateDayTextNextFrame()
+    {
+        yield return null;
+        ReadScore();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Find the EmailManager GameObject
         GameObject emailManagerObj = GameObject.Find("EmailManager");
 
         if (emailManagerObj != null)
         {
-            // Get the EmailManager script component
             emailManager = emailManagerObj.GetComponent<EmailManager>();
 
             if (emailManager != null)
@@ -79,30 +119,33 @@ public class LoadCounter : MonoBehaviour
                 Debug.Log($"Scene loaded {sceneLoadCount} times");
                 if (sceneLoadCount == 1)
                 {
-
+                    StartCoroutine(UpdateDayTextNextFrame());
                     StartCoroutine(DelayedReveal());
                 }
                 if (sceneLoadCount == 2)
                 {
-                    
+                    StartCoroutine(UpdateDayTextNextFrame());
                     StartCoroutine(DelayedReveal2());
                 }
                 if (sceneLoadCount == 3)
                 {
-
+                    StartCoroutine(UpdateDayTextNextFrame());
                     StartCoroutine(DelayedReveal3());
                 }
                 if (sceneLoadCount == 4)
                 {
-
+                    StartCoroutine(UpdateDayTextNextFrame());
                     StartCoroutine(DelayedReveal4());
                 }
                 if (sceneLoadCount == 5)
                 {
-
+                    StartCoroutine(UpdateDayTextNextFrame());
                     StartCoroutine(DelayedReveal5());
                 }
-
+                if (sceneLoadCount == 6)
+                {
+                    Application.Quit();
+                }
             }
             else
             {
@@ -117,18 +160,12 @@ public class LoadCounter : MonoBehaviour
 
     private IEnumerator DelayedReveal()
     {
-        yield return new WaitForSeconds(1f);  // wait 1 second
-
-        if (emailManager != null)
-        {
-            //emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-        }
+        yield return new WaitForSeconds(1f);
+        if (emailManager != null) emailManager.RevealNextEmail();
     }
     private IEnumerator DelayedReveal2()
     {
-        yield return new WaitForSeconds(1f);  // wait 1 second
-
+        yield return new WaitForSeconds(1f);
         if (emailManager != null)
         {
             emailManager.RevealNextEmail();
@@ -137,8 +174,7 @@ public class LoadCounter : MonoBehaviour
     }
     private IEnumerator DelayedReveal3()
     {
-        yield return new WaitForSeconds(1f);  // wait 1 second
-
+        yield return new WaitForSeconds(1f);
         if (emailManager != null)
         {
             emailManager.RevealNextEmail();
@@ -148,8 +184,7 @@ public class LoadCounter : MonoBehaviour
     }
     private IEnumerator DelayedReveal4()
     {
-        yield return new WaitForSeconds(1f);  // wait 1 second
-
+        yield return new WaitForSeconds(1f);
         if (emailManager != null)
         {
             emailManager.RevealNextEmail();
@@ -160,17 +195,38 @@ public class LoadCounter : MonoBehaviour
     }
     private IEnumerator DelayedReveal5()
     {
-        yield return new WaitForSeconds(1f);  // wait 1 second
+        yield return new WaitForSeconds(1f);
 
         if (emailManager != null)
         {
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            
+            emailManager.RevealEmail5();
         }
+
+        // --- Only change needed: find Cover even if it is inactive ---
+        if (Cover == null)
+        {
+            Cover = FindInSceneEvenIfInactive("Cover");
+        }
+        if (Cover != null)
+        {
+            Cover.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Cover GameObject not found (even inactive).");
+        }
+    }
+
+    // Helper to find a scene GameObject even if it's inactive
+    private GameObject FindInSceneEvenIfInactive(string name)
+    {
+        var all = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (var go in all)
+        {
+            if (go.name == name && go.scene.IsValid()) // ensure it's a scene object, not a prefab/asset
+                return go;
+        }
+        return null;
     }
 
     private void OnDestroy()
