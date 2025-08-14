@@ -145,7 +145,7 @@ public class EmailManager : MonoBehaviour
         }
         else
         {
-            Application.OpenURL("https://grabify.link/SFZD5D");
+            Application.OpenURL("https://www.google.com/search?q=don%27t+click+shady+emails&rlz=1C1GCEA_enAU1164AU1165&oq=don%27t+click+shady+emails&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIKCAEQABiABBiiBDIKCAIQABiABBiiBDIKCAMQABiABBiiBDIKCAQQABiABBiiBDIKCAUQABiABBiiBNIBCDY4NzFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8");
             wrongCount++;
             Debug.Log("Wrong! haha doxing time Total wrong: " + wrongCount);
         }
