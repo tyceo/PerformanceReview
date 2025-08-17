@@ -8,12 +8,15 @@ public class PaperTossMovement : MonoBehaviour
     {
 
         public SpringJoint2D spring;
-        public GameObject invisibleWall;
+        [SerializeField] public GameObject invisibleWall;
         public float resetSpeed = 2.8f;
+        public bool noGoZone = false;
+
 
 
         void Awake()
         {
+        noGoZone = false;
             gameObject.GetComponent<Rigidbody2D>().simulated = false;
             invisibleWall = GameObject.FindGameObjectWithTag("invisibleWall");
             
@@ -28,18 +31,18 @@ public class PaperTossMovement : MonoBehaviour
        
 
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && noGoZone == false)
         {
             gameObject.GetComponent<Rigidbody2D>().simulated = true;
             OnMouseDown();
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        else if (Input.GetKeyUp(KeyCode.Mouse0) && noGoZone == false)
         {
-            invisibleWall.GetComponent<BoxCollider2D>().enabled = false;
+            //invisibleWall.GetComponent<BoxCollider2D>().enabled = false;
             OnMouseUp();
             StartCoroutine(StartCountdown());
         }
-        else if (Input.GetKey(KeyCode.Mouse0))
+        else if (Input.GetKey(KeyCode.Mouse0) && noGoZone == false)
         { 
         OnMouseDrag();
         
@@ -94,7 +97,17 @@ public class PaperTossMovement : MonoBehaviour
 
         }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("First");
+        
+            Debug.Log("Luigi house but it mansion");
+            noGoZone = true;
+        
     }
+
+
+
+}
 
 
