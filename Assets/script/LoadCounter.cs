@@ -20,6 +20,8 @@ public class LoadCounter : MonoBehaviour
 
     public GameObject Cover;
 
+    private TMP_Text wrongAmountTMP;
+
     private void Awake()
     {
         if (Instance == null)
@@ -37,6 +39,17 @@ public class LoadCounter : MonoBehaviour
     void Start()
     {
         StartCoroutine(UpdateDayTextNextFrame());
+    }
+
+    public void AddWrong()
+    {
+        WrongAmount++;
+
+        if (wrongAmountTMP == null)
+            wrongAmountTMP = FindTMPInScene("WrongAmountText");
+
+        if (wrongAmountTMP != null)
+            wrongAmountTMP.text = WrongAmount.ToString();
     }
 
     public void ReadScore()
@@ -167,64 +180,55 @@ public class LoadCounter : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         if (emailManager != null)
-        {
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-        }
+            emailManager.RevealEmail2();
     }
     private IEnumerator DelayedReveal3()
     {
         yield return new WaitForSeconds(1f);
         if (emailManager != null)
-        {
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-        }
+            emailManager.RevealEmail3();
     }
     private IEnumerator DelayedReveal4()
     {
         yield return new WaitForSeconds(1f);
         if (emailManager != null)
-        {
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-            emailManager.RevealNextEmail();
-        }
+            emailManager.RevealEmail4();
     }
     private IEnumerator DelayedReveal5()
     {
         yield return new WaitForSeconds(1f);
 
         if (emailManager != null)
-        {
             emailManager.RevealEmail5();
-        }
 
-        // --- Only change needed: find Cover even if it is inactive ---
+        // Find Cover even if inactive
         if (Cover == null)
-        {
             Cover = FindInSceneEvenIfInactive("Cover");
-        }
         if (Cover != null)
-        {
             Cover.SetActive(true);
-        }
         else
-        {
             Debug.LogWarning("Cover GameObject not found (even inactive).");
-        }
     }
 
-    // Helper to find a scene GameObject even if it's inactive
+    // Helper to find a scene GameObject even if inactive
     private GameObject FindInSceneEvenIfInactive(string name)
     {
         var all = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (var go in all)
         {
-            if (go.name == name && go.scene.IsValid()) // ensure it's a scene object, not a prefab/asset
+            if (go.name == name && go.scene.IsValid())
                 return go;
+        }
+        return null;
+    }
+
+    private TMP_Text FindTMPInScene(string name)
+    {
+        TMP_Text[] allTMP = Resources.FindObjectsOfTypeAll<TMP_Text>(); // removed 'true'
+        foreach (TMP_Text t in allTMP)
+        {
+            if (t.name == name && t.gameObject.scene.IsValid())
+                return t;
         }
         return null;
     }

@@ -89,7 +89,31 @@ public class EmailManager : MonoBehaviour
             revealedCount++;
         }
     }
-    
+    public void RevealEmail2()
+    {
+        if (revealedCount < spawnedEmails.Count)
+        {
+            spawnedEmails[1].SetActive(true);
+            revealedCount++;
+        }
+    }
+    public void RevealEmail3()
+    {
+        if (revealedCount < spawnedEmails.Count)
+        {
+            spawnedEmails[2].SetActive(true);
+            revealedCount++;
+        }
+    }
+    public void RevealEmail4()
+    {
+        if (revealedCount < spawnedEmails.Count)
+        {
+            spawnedEmails[3].SetActive(true);
+            revealedCount++;
+        }
+    }
+
 
     public void ShowEmail(Email email)
     {
@@ -145,9 +169,22 @@ public class EmailManager : MonoBehaviour
         }
         else
         {
-            Application.OpenURL("https://www.google.com/search?q=don%27t+click+shady+emails&rlz=1C1GCEA_enAU1164AU1165&oq=don%27t+click+shady+emails&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIKCAEQABiABBiiBDIKCAIQABiABBiiBDIKCAMQABiABBiiBDIKCAQQABiABBiiBDIKCAUQABiABBiiBNIBCDY4NzFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8");
+            Application.OpenURL("https://www.google.com/search?q=don%27t+click+shady+emails");
             wrongCount++;
             Debug.Log("Wrong! haha doxing time Total wrong: " + wrongCount);
+
+            // Update LoadCounter when a wrong answer is given
+            if (LoadCounter.Instance != null)
+            {
+                LoadCounter.Instance.WrongAmount++;
+                Debug.Log("LoadCounter WrongAmount: " + LoadCounter.Instance.WrongAmount);
+            }
+
+            // Also update the on-screen UI
+            if (WrongAmountText != null)
+            {
+                WrongAmountText.text = wrongCount.ToString();
+            }
         }
 
         // Mark as answered
@@ -157,6 +194,6 @@ public class EmailManager : MonoBehaviour
         SetAnswerButtonsActive(false);
     }
 
-    
+
 
 }
